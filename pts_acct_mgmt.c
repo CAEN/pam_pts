@@ -19,6 +19,7 @@
 
 #define DEFAULT_DENY_FILE "/etc/login.sorry"
 #define DEFAULT_DENY_MSG "You are not authorized to use this service.\n"
+#define CL_RETURN(X) { closelog() ; return((X)) ; }
 
 void deny_service(
 	struct pam_conv *c,
@@ -71,13 +72,13 @@ pam_sm_acct_mgmt(
 	if (pam_get_item(pamh, PAM_USER, (void **)&user) != PAM_SUCCESS) {
 		syslog(LOG_DEBUG, 
                        "pam service error:  Could not get username.");
-		return (PAM_SERVICE_ERR);
+		CL_RETURN(PAM_SERVICE_ERR);
 	}
 
 	if (pam_get_item(pamh, PAM_SERVICE, (void **)&pg) != PAM_SUCCESS) {
 		syslog(LOG_DEBUG, 
                        "pam service error:  Could not get group.");
-		return (PAM_SERVICE_ERR);
+		CL_RETURN(PAM_SERVICE_ERR);
 	}
 
 	error = pam_get_item(pamh, PAM_CONV, (void**) &pam_convp);
@@ -85,20 +86,20 @@ pam_sm_acct_mgmt(
 	if (error != PAM_SUCCESS) {
 		syslog(LOG_DEBUG, 
                        "pam service error:  Could not get pam_conv.");
-		return (error);
+		CL_RETURN(error);
 	}
 
 	if (user == 0 ) {
 		syslog(LOG_DEBUG, "allowing access for null username ptr");
-		return (PAM_SUCCESS);
+		CL_RETURN(PAM_SUCCESS);
 	}
 	if (*user == '\0') {
 		syslog(LOG_DEBUG, "allowing access for zero-length username");
-		return (PAM_SUCCESS);
+		CL_RETURN(PAM_SUCCESS);
 	}
         if (strncmp(user, "root", 5) == 0) {
 		syslog(LOG_NOTICE, "allowing access for root");
-		return (PAM_SUCCESS);
+		CL_RETURN(PAM_SUCCESS);
 	}
 
 	for (i = 0; i < argc; i++) {
@@ -122,12 +123,12 @@ pam_sm_acct_mgmt(
 
 	if (allow_service_request(user,pg,NULL)) {
 		syslog(LOG_NOTICE, "pam_pts: service granted to %s", user);
-		return(PAM_SUCCESS);
+		CL_RETURN(PAM_SUCCESS);
 	}
 	else {
 		syslog(LOG_ERR, "pam_pts: ACCESS DENIED for %s", user);
 		deny_service(pam_convp,
 			usedenyfile ? denyfile : DEFAULT_DENY_FILE);
-		return(PAM_PERM_DENIED);
+		CL_RETURN(PAM_PERM_DENIED);
 	}
 }
