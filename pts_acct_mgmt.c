@@ -122,11 +122,11 @@ pam_sm_acct_mgmt(
 	}
 
 	if (allow_service_request(user,pg,NULL)) {
-		syslog(LOG_NOTICE, "pam_pts: service granted to %s", user);
+		syslog(LOG_NOTICE, "service granted to %s", user);
 		CL_RETURN(PAM_SUCCESS);
 	}
 	else {
-		syslog(LOG_ERR, "pam_pts: ACCESS DENIED for %s", user);
+		syslog(LOG_ERR, "ACCESS DENIED for %s", user);
 		deny_service(pam_convp,
 			usedenyfile ? denyfile : DEFAULT_DENY_FILE);
 		CL_RETURN(PAM_PERM_DENIED);
