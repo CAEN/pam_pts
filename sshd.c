@@ -20,8 +20,8 @@ agent connections.
 /*
  * $Id$
  * $Log$
- * Revision 1.1  2002/01/28 16:41:38  smeyer
- * Initial revision
+ * Revision 1.1.1.1  2002/01/28 16:41:38  smeyer
+ * initial rev
  *
  * Revision 1.61  1999/04/29 11:29:47  tri
  * 	Added a syslog call.
