@@ -1,5 +1,9 @@
 /* Written by jhorwitz@umich.edu -- yay for me */
 
+/* adbisaro@umich.edu                                */
+/* Sun, 15 Dec 2002, 1713 hrs EST (GMT-0500)         */
+/* improve logging, fix possible format-strings bug. */
+
 #include <syslog.h>
 #include <pwd.h>
 #include <security/pam_appl.h>
@@ -62,18 +66,40 @@ pam_sm_acct_mgmt(
 	int	error = 0;
 	struct pam_conv *pam_convp;
 
-	if (pam_get_item(pamh, PAM_USER, (void **)&user) != PAM_SUCCESS)
-		return (PAM_SERVICE_ERR);
+        openlog("pam_pts", LOG_PID, LOG_AUTH);
 
-	if (pam_get_item(pamh, PAM_SERVICE, (void **)&pg) != PAM_SUCCESS)
+	if (pam_get_item(pamh, PAM_USER, (void **)&user) != PAM_SUCCESS) {
+		syslog(LOG_DEBUG, 
+                       "pam service error:  Could not get username.");
 		return (PAM_SERVICE_ERR);
+	}
+
+	if (pam_get_item(pamh, PAM_SERVICE, (void **)&pg) != PAM_SUCCESS) {
+		syslog(LOG_DEBUG, 
+                       "pam service error:  Could not get group.");
+		return (PAM_SERVICE_ERR);
+	}
 
 	error = pam_get_item(pamh, PAM_CONV, (void**) &pam_convp);
-	if (error != PAM_SUCCESS)
-		return (error);
 
-	if (user == 0 || *user == '\0' || (strcmp(user, "root") == 0))
+	if (error != PAM_SUCCESS) {
+		syslog(LOG_DEBUG, 
+                       "pam service error:  Could not get pam_conv.");
+		return (error);
+	}
+
+	if (user == 0 ) {
+		syslog(LOG_DEBUG, "allowing access for null username ptr");
 		return (PAM_SUCCESS);
+	}
+	if (*user == '\0') {
+		syslog(LOG_DEBUG, "allowing access for zero-length username");
+		return (PAM_SUCCESS);
+	}
+        if (strncmp(user, "root", 5) == 0) {
+		syslog(LOG_NOTICE, "allowing access for root");
+		return (PAM_SUCCESS);
+	}
 
 	for (i = 0; i < argc; i++) {
 		if (strcasecmp(argv[i], "debug") == 0)
@@ -87,12 +113,15 @@ pam_sm_acct_mgmt(
 			strncpy(denyfile,argv[i]+9,MAXPATHLEN);
 			usedenyfile = 1;
 		}
-		else
-			syslog(LOG_DEBUG, "illegal option %s", argv[i]);
+		else {
+			/* If we can't trust it in the previous case,  */
+			/* then we can't trust it here either.         */
+			syslog(LOG_DEBUG, "illegal option passed in argv");
+                }
 	}
 
 	if (allow_service_request(user,pg,NULL)) {
-		syslog(LOG_ERR, "pam_pts: service granted to %s", user);
+		syslog(LOG_NOTICE, "pam_pts: service granted to %s", user);
 		return(PAM_SUCCESS);
 	}
 	else {

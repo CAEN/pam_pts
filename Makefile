@@ -1,7 +1,7 @@
 # AFS Protection Group Authorization PAM module
 # jhorwitz@umich.edu
 
-MODULE=pam_pts.so.1
+MODULE=pam_pts.so.2
 
 OBJECTS=	pts_acct_mgmt.o \
 		utils.o \
@@ -21,7 +21,7 @@ AFSLIBS = -L/usr/lib -L/usr/lib/afs -lkauth -lprot -lubik -lauth.krb -laudit /us
 LDLIBS += -lc -lpam -lnsl -lsocket $(AFSLIBS)
 
 # resolve with local variables in shared library
-DYNFLAGS = -h pam_pts.so.1 -z defs -Bsymbolic
+DYNFLAGS = -h $(MODULE) -z defs -Bsymbolic
 
 LINTFLAGS=
 
