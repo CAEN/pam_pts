@@ -7,3 +7,11 @@ The build notes file 'BUILD-NOTES-pam_pts.txt' is mostly a diff of some
 earlier versions and isn't particularly useful. Once I've confirmed and
 committed a working version of pam_pts, I'll put a CVS tag on it and move
 the old build notes to the attic.
+
+Several files were locked by Allen Bailey <akbailey@umich.edu>. I've
+broken the locks and installed my changes to Makefile, auth-umich.c,
+and pts_acct_mgmt.c.
+
+To build this, you'll need the openafs dev package, openafs-krb5, and
+pam-devel. For the build on luigi I already had the first two, added
+pam-dev with 'yum install pam-devel'.
