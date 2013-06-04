@@ -20,13 +20,13 @@ pam_sm_acct_mgmt(
         int     error = 0;
         struct pam_conv *pam_convp;
 
-        if (pam_get_item(pamh, PAM_USER, (void **)&user) != PAM_SUCCESS)
+        if (pam_get_item(pamh, PAM_USER, (const void **)&user) != PAM_SUCCESS)
                 return (PAM_SERVICE_ERR);
 
-        if (pam_get_item(pamh, PAM_SERVICE, (void **)&pg) != PAM_SUCCESS)
+        if (pam_get_item(pamh, PAM_SERVICE, (const void **)&pg) != PAM_SUCCESS)
                 return (PAM_SERVICE_ERR);
 
-        error = pam_get_item(pamh, PAM_CONV, (void**) &pam_convp);
+        error = pam_get_item(pamh, PAM_CONV, (const void**) &pam_convp);
         if (error != PAM_SUCCESS)
                 return (error);
 
