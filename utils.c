@@ -22,7 +22,7 @@ __free_msg(num_msg, msg)
 		m = msg;
 		for (i = 0; i < num_msg; i++, m++) {
 			if (m->msg)
-				free(m->msg);
+				free((void *)m->msg);
 		}
 		free(msg);
 	}
@@ -88,7 +88,7 @@ __display_errmsg(conv_funp, num_msg, messages, conv_apdp)
 		m->msg_style = PAM_ERROR_MSG;
 		m->msg = (char *)malloc(PAM_MAX_MSG_SIZE);
 		if (m->msg != NULL)
-			(void) strcpy(m->msg, (const char *)messages[i]);
+			(void) strcpy((char *)m->msg, (const char *)messages[i]);
 		else
 			continue;
 		m++;
