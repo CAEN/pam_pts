@@ -4,7 +4,7 @@
 
 #define AUTHORIZE_FILE  "/.authorize"
 
-#define AFSCONF_CLIENTNAME "/usr/vice/etc"
+#define AFSCONF_CLIENTNAME "/etc/openafs"
 
 int allow_service_request(const char *user,
 			  const char *service, const char *file)

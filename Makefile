@@ -1,27 +1,30 @@
 # AFS Protection Group Authorization PAM module
 # jhorwitz@umich.edu
 
-MODULE=pam_pts.so.2
+MODULE=pam_pts.so
 
 OBJECTS=	pts_acct_mgmt.o \
 		utils.o \
-		auth-umich.o
+		auth-umich.o 
+#		comerr_add.o
 
 SRCS= $(OBJECTS:%.o=%.c)
 
 # include library definitions
 
-BUILD.SO=	$(CC) -o $@ -M mapfile -G $(DYNFLAGS) $(OBJECTS) $(LDLIBS)
+BUILD.SO=      $(CC) -o $@ --shared $(OBJECTS) $(LDLIBS)
 
-CPPFLAGS += -K pic -I.
+CPPFLAGS += -fpic -I.
 
 # library dependency
 # LDLIBS+= -lcmd
-AFSLIBS = -L/usr/lib -L/usr/lib/afs -lkauth -lprot -lubik -lauth.krb -laudit /usr/lib/afs/libsys.a -lrxkad -ldes -lrx -llwp -lcom_err -lafsint /usr/lib/afs/util.a /usr/ucblib/libucb.a
-LDLIBS += -lc -lpam -lnsl -lsocket $(AFSLIBS)
+#AFSLIBS = -L/usr/lib -L/usr/lib/afs -lkauth -lprot -lubik -lauth.krb -laudit /usr/lib/afs/libsys.a -lrxkad -ldes -lrx /usr/lib/afs/libcom_err.a -lcom_err  -lafsint /usr/lib/afs/util.a -lresolv -lpthread 
+AFSLIBS = -L/usr/lib -L/usr/lib/afs -lafsrpc -lafsauthent -lutil -lutil -lafsrpc -lutil -lresolv -lpthread
+
+LDLIBS += -lc -lpam -lnsl  $(AFSLIBS)
 
 # resolve with local variables in shared library
-DYNFLAGS = -h $(MODULE) -z defs -Bsymbolic
+DYNFLAGS = -o $(MODULE)
 
 LINTFLAGS=
 

@@ -14,6 +14,7 @@
 #include <sys/param.h>
 #include <fcntl.h>
 #include <syslog.h>
+#include <string.h>
 
 #include "utils.h"
 
@@ -61,7 +62,7 @@ pam_sm_acct_mgmt(
 	char	*pg;
 	char	denyfile[MAXPATHLEN];
 	int	i;
-	int	debug = 0;
+	int	debug = 1;
 	int	nowarn = 0;
 	int	usedenyfile = 0;
 	int	error = 0;
@@ -69,19 +70,19 @@ pam_sm_acct_mgmt(
 
         openlog("pam_pts", LOG_PID, LOG_AUTH);
 
-	if (pam_get_item(pamh, PAM_USER, (void **)&user) != PAM_SUCCESS) {
+	if (pam_get_item(pamh, PAM_USER, (const void **)&user) != PAM_SUCCESS) {
 		syslog(LOG_DEBUG, 
                        "pam service error:  Could not get username.");
 		CL_RETURN(PAM_SERVICE_ERR);
 	}
 
-	if (pam_get_item(pamh, PAM_SERVICE, (void **)&pg) != PAM_SUCCESS) {
+	if (pam_get_item(pamh, PAM_SERVICE, (const void **)&pg) != PAM_SUCCESS) {
 		syslog(LOG_DEBUG, 
                        "pam service error:  Could not get group.");
 		CL_RETURN(PAM_SERVICE_ERR);
 	}
 
-	error = pam_get_item(pamh, PAM_CONV, (void**) &pam_convp);
+	error = pam_get_item(pamh, PAM_CONV, (const void**) &pam_convp);
 
 	if (error != PAM_SUCCESS) {
 		syslog(LOG_DEBUG, 
