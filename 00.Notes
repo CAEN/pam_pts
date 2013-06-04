@@ -1,0 +1,9 @@
+2013/06/04 11:34: Updates by scs
+
+As of the commits made this moring, this source tree successfully builds
+pam_pts on RHEL6. It has not yet been tested.
+
+The build notes file 'BUILD-NOTES-pam_pts.txt' is mostly a diff of some
+earlier versions and isn't particularly useful. Once I've confirmed and
+committed a working version of pam_pts, I'll put a CVS tag on it and move
+the old build notes to the attic.
