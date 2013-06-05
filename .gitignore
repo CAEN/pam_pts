@@ -1,0 +1,4 @@
+*.o
+*~
+*.swp
+pam_pts.so
