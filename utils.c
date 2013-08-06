@@ -11,9 +11,7 @@
 #include "utils.h"
 
 void
-__free_msg(num_msg, msg)
-	int num_msg;
-	struct pam_message *msg;
+__free_msg( int num_msg, struct pam_message *msg )
 {
 	int 			i;
 	struct pam_message 	*m;
@@ -34,9 +32,7 @@ __free_msg(num_msg, msg)
  */
 
 void
-__free_resp(num_msg, resp)
-	int num_msg;
-	struct pam_response *resp;
+__free_resp( int num_msg, struct pam_response *resp )
 {
 	int			i;
 	struct pam_response	*r;
@@ -58,11 +54,11 @@ __free_resp(num_msg, resp)
  */
 
 int
-__display_errmsg(conv_funp, num_msg, messages, conv_apdp)
-	int (*conv_funp)();
-	int num_msg;
-	char messages[PAM_MAX_NUM_MSG][PAM_MAX_MSG_SIZE];
-	void *conv_apdp;
+__display_errmsg(
+	int (*conv_funp)(),
+	int num_msg,
+	char messages[PAM_MAX_NUM_MSG][PAM_MAX_MSG_SIZE],
+	void *conv_apdp )
 {
 	struct pam_message	*msg;
 	struct pam_message	*m;
