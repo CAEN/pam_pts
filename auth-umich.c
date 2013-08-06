@@ -3,6 +3,8 @@
 #include <afs/ptserver.h>
 #include <afs/ptuser.h>
 
+#include "auth-umich.h"
+
 #define AUTHORIZE_FILE  "/etc/pam_pts.confdir"
 
 #define AFSCONF_CLIENTNAME "/usr/vice/etc"

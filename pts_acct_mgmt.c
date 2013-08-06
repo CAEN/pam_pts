@@ -17,6 +17,7 @@
 #include <string.h>
 
 #include "utils.h"
+#include "auth-umich.h"
 
 #define DEFAULT_DENY_FILE "/etc/login.sorry"
 #define DEFAULT_DENY_MSG "You are not authorized to use this service.\n"
