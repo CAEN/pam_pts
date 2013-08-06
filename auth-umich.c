@@ -1,6 +1,7 @@
 #include <afs/stds.h>
 #include <afs/cellconfig.h>
 #include <afs/ptserver.h>
+#include <afs/ptuser.h>
 
 #define AUTHORIZE_FILE  "/etc/pam_pts.confdir"
 
