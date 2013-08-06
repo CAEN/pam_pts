@@ -1,17 +1,10 @@
-2013/06/04 11:34: Updates by scs
-
-As of the commits made this moring, this source tree successfully builds
-pam_pts on RHEL6. It has not yet been tested.
-
-The build notes file 'BUILD-NOTES-pam_pts.txt' is mostly a diff of some
-earlier versions and isn't particularly useful. Once I've confirmed and
-committed a working version of pam_pts, I'll put a CVS tag on it and move
-the old build notes to the attic.
-
-Several files were locked by Allen Bailey <akbailey@umich.edu>. I've
-broken the locks and installed my changes to Makefile, auth-umich.c,
-and pts_acct_mgmt.c.
+2013/08/06 14:13 scs
 
 To build this, you'll need the openafs dev package, openafs-krb5, and
 pam-devel. For the build on luigi I already had the first two, added
 pam-dev with 'yum install pam-devel'.
+
+As of this date it is only slightly tested. Integrating it with RHEL6
+pam/pam_afs at login time needs to be documented. The setup on mario is
+known to work; luigi is known not to work. No attempts have been made
+to put this onto the new stat servers yet.
