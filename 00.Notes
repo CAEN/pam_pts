@@ -8,3 +8,7 @@ As of this date it is only slightly tested. Integrating it with RHEL6
 pam/pam_afs at login time needs to be documented. The setup on mario is
 known to work; luigi is known not to work. No attempts have been made
 to put this onto the new stat servers yet.
+
+Check this out of CVS with the command
+   cvs -d /afs/umich.edu/um/src_58/pam checkout pam_pts
+
