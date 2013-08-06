@@ -6,7 +6,6 @@ MODULE=pam_pts.so
 OBJECTS=	pts_acct_mgmt.o \
 		utils.o \
 		auth-umich.o 
-#		comerr_add.o
 
 SRCS= $(OBJECTS:%.o=%.c)
 
@@ -22,7 +21,7 @@ CPPFLAGS += -fpic -I.
 # Most of the library needs have gone away with our conversion to
 # kerberosV and openafs 1.6.2. Just be sure you have dev libraries
 # for krb5, openafs and pam installed, and this should be sufficient.
-# development environment installed.
+#AFSLIBS = -L/usr/lib -L/usr/lib/afs -lafsrpc -lafsauthent -lutil -lutil -lafsrpc -lutil -lresolv -lpthread
 AFSLIBS = -L/usr/lib -L/usr/lib/afs
 
 LDLIBS += -lc -lpam -lnsl  $(AFSLIBS)
