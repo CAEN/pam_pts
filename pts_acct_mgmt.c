@@ -13,6 +13,7 @@
 #include <sys/stat.h>
 #include <sys/param.h>
 #include <fcntl.h>
+#include <unistd.h>
 #include <syslog.h>
 #include <string.h>
 
