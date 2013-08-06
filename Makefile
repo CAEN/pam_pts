@@ -12,9 +12,9 @@ SRCS= $(OBJECTS:%.o=%.c)
 
 # include library definitions
 
-BUILD.SO=      $(CC) -o $@ --shared $(OBJECTS) $(LDLIBS)
+BUILD.SO=      $(CC) -Wall -o $@ --shared $(OBJECTS) $(LDLIBS)
 
-CPPFLAGS += -fpic -I.
+CPPFLAGS += -Wall -fpic -I.
 
 # library dependency
 # LDLIBS+= -lcmd
@@ -23,7 +23,18 @@ CPPFLAGS += -fpic -I.
 # kerberosV and openafs 1.6.2. Just be sure you have dev libraries
 # for krb5, openafs and pam installed, and this should be sufficient.
 # development environment installed.
+ifndef _ARCH
+ARCH := $(shell uname -m)
+export _ARCH
+endif
+
+ifndef AFSLIBS
+ifeq ($(ARCH),x86_64)
+AFSLIBS = -L/usr/lib64 -L/usr/lib64/afs
+else
 AFSLIBS = -L/usr/lib -L/usr/lib/afs
+endif
+endif # AFSLIBS
 
 LDLIBS += -lc -lpam -lnsl  $(AFSLIBS)
 
