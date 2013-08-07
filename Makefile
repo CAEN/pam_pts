@@ -6,7 +6,6 @@ MODULE=pam_pts.so
 OBJECTS=	pts_acct_mgmt.o \
 		utils.o \
 		auth-umich.o 
-#		comerr_add.o
 
 SRCS= $(OBJECTS:%.o=%.c)
 
