@@ -11,9 +11,9 @@ SRCS= $(OBJECTS:%.o=%.c)
 
 # include library definitions
 
-BUILD.SO=      $(CC) -o $@ --shared $(OBJECTS) $(LDLIBS)
+BUILD.SO=      $(CC) -Wall -o $@ --shared $(OBJECTS) $(LDLIBS)
 
-CPPFLAGS += -fpic -I.
+CPPFLAGS += -Wall -fpic -I.
 
 # library dependency
 # LDLIBS+= -lcmd
@@ -21,8 +21,19 @@ CPPFLAGS += -fpic -I.
 # Most of the library needs have gone away with our conversion to
 # kerberosV and openafs 1.6.2. Just be sure you have dev libraries
 # for krb5, openafs and pam installed, and this should be sufficient.
-#AFSLIBS = -L/usr/lib -L/usr/lib/afs -lafsrpc -lafsauthent -lutil -lutil -lafsrpc -lutil -lresolv -lpthread
-AFSLIBS = -L/usr/lib -L/usr/lib/afs
+# development environment installed.
+ifndef _ARCH
+ARCH := $(shell uname -m)
+export _ARCH
+endif
+
+ifndef AFSLIBS
+ifeq ($(ARCH),x86_64)
+AFSLIBS = -L/usr/lib64 -L/usr/lib64/afs /usr/lib64/afs/libprot.a /usr/lib64/libafsauthent_pic.a -lafsrpc 
+else
+AFSLIBS = -L/usr/lib -L/usr/lib/afs /usr/lib/afs/libprot.a /usr/lib/libafsauthent_pic.a -lafsrpc
+endif
+endif # AFSLIBS
 
 LDLIBS += -lc -lpam -lnsl  $(AFSLIBS)
 
