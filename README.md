@@ -3,10 +3,6 @@ pam_pts
 
 PAM module that uses AFS PTS groups for managing access
 
-<H1>pam_pts</H1>
-Section: pam_pts documentation (8)<BR>Updated: 2013/08/08<BR><A HREF="#index">Index</A>
-<A HREF="http://localhost/cgi-bin/man/man2html">Return to Main Contents</A><HR>
-
 <P>
 <A NAME="lbAB">&nbsp;</A>
 <H2>NAME</H2>
@@ -40,8 +36,8 @@ denies access.
 <P>
 The configuration file lists PTS groups and what service is allowed.
 Each line starts with a PTS group, then a list of services, separated
-by a space, tab or comma.  All leading whitespace, empty lines and
-#-delimited comments are ignored.  All lines with improper formatting
+by a space, tab or comma.  All leading whitespace, empty lines
+and #-delimited comments are ignored.  All lines with improper formatting
 are skipped.
 <P>
 Each line in the configuration line is read, and the PAM service
@@ -61,7 +57,7 @@ authorization.
 <P>
 <DL COMPACT>
 <DT>debug<DD>
-turns on debugging via <B><A HREF="http://localhost/cgi-bin/man/man2html?3+syslog">syslog</A></B>(3).  Debugging messages are logged with
+turns on debugging via <B>syslog</B>(3).  Debugging messages are logged with
 priority <I>LOG_DEBUG</I>.
 <P>
 <DT>denyfile=<I>/path/to/file</I><DD>
@@ -87,7 +83,7 @@ does not log any messages on failure
 <A NAME="lbAG">&nbsp;</A>
 <H2>SEE ALSO</H2>
 
-<B><A HREF="http://localhost/cgi-bin/man/man2html?5+pam_krb5">pam_krb5</A></B>(5)
+<B>pam_krb5</B>(5)
 
 <BR>
 
