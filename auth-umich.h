@@ -1,8 +1,13 @@
 #ifndef _AUTH_UMICH_H
 #define	_AUTH_UMICH_H
 
-#define AUTHORIZE_FILE  "/etc/pam_pts.confdir"
-#define AFSCONF_CLIENTNAME "/usr/vice/etc"
+#ifndef AUTHORIZE_FILE
+#define AUTHORIZE_FILE  "/.authorize"
+#endif
+
+#ifndef AFSCONF_CLIENTNAME
+#define AFSCONF_CLIENTNAME "/etc/openafs"
+#endif
 
 int allow_service_request(const char *user,
 			  const char *service, const char *file);
