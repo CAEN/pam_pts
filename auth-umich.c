@@ -2,6 +2,7 @@
 #include <afs/cellconfig.h>
 #include <afs/ptserver.h>
 #include <afs/ptuser.h>
+#include <afs/dirpath.h>
 
 #include "auth-umich.h"
 
@@ -40,7 +41,7 @@ int allow_service_request(const char *user,
       }
   }
   /* If pts server initialization fails, deny access. */
-  if (pr_Initialize(0, AFSCONF_CLIENTNAME, 0)) {
+  if (pr_Initialize(0, AFSDIR_CLIENT_ETC_DIR, 0)) {
     return 0;
   }
   
