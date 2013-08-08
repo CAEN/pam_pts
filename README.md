@@ -93,16 +93,3 @@ does not log any messages on failure
 
 Jonathan Billings &lt;<A HREF="mailto:jsbillin@umich.edu">jsbillin@umich.edu</A>&gt;
 <P>
-
-<HR>
-<A NAME="index">&nbsp;</A><H2>Index</H2>
-<DL>
-<DT><A HREF="#lbAB">NAME</A><DD>
-<DT><A HREF="#lbAC">SYNOPSIS</A><DD>
-<DT><A HREF="#lbAD">DESCRIPTION</A><DD>
-<DT><A HREF="#lbAE">ARGUMENTS</A><DD>
-<DT><A HREF="#lbAF">FILES</A><DD>
-<DT><A HREF="#lbAG">SEE ALSO</A><DD>
-<DT><A HREF="#lbAH">AUTHOR</A><DD>
-</DL>
-<HR>
