@@ -19,7 +19,7 @@ PAM module that uses PTS membership to authorize access
 %setup -q
 
 %build
-make %{?_smp_mflags} CPPFLAGS='-Wall -fpic -I. -DAUTHORIZE_FILE=\"/etc/pam_pts.confdir\" -DAFSCONF_CLIENTNAME=\"/usr/vice/etc\"'
+make %{?_smp_mflags} CPPFLAGS='-Wall -fpic -I. -DAUTHORIZE_FILE=\"/etc/pam_pts.confdir\"'
 
 %install
 rm -rf $RPM_BUILD_ROOT
