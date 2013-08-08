@@ -84,12 +84,3 @@ does not log any messages on failure
 <H2>SEE ALSO</H2>
 
 <B>pam_krb5</B>(5)
-
-<BR>
-
-<P>
-<A NAME="lbAH">&nbsp;</A>
-<H2>AUTHOR</H2>
-
-Jonathan Billings &lt;<A HREF="mailto:jsbillin@umich.edu">jsbillin@umich.edu</A>&gt;
-<P>
