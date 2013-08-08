@@ -29,9 +29,9 @@ endif
 
 ifndef AFSLIBS
 ifeq ($(ARCH),x86_64)
-AFSLIBS = -L/usr/lib64 -L/usr/lib64/afs
+AFSLIBS = -L/usr/lib64 -L/usr/lib64/afs /usr/lib64/afs/libprot.a /usr/lib64/libafsauthent_pic.a -lafsrpc -lkopenafs
 else
-AFSLIBS = -L/usr/lib -L/usr/lib/afs
+AFSLIBS = -L/usr/lib -L/usr/lib/afs /usr/lib/afs/libprot.a /usr/lib/libafsauthent_pic.a -lafsrpc -lkopenafs 
 endif
 endif # AFSLIBS
 
