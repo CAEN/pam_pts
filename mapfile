@@ -1,7 +1,0 @@
-pam_pts.so.1 {
-	global:
-		# Published PAM service module interfaces
-		pam_sm_acct_mgmt;
-	local:
-		*;
-};
