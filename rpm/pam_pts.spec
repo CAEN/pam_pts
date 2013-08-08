@@ -43,3 +43,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man8/pam_pts.8.gz
 
 %changelog
+* Thu Aug 08 2013 Jonathan S. Billings <jsbillin@umich.edu> - 0.1-1
+- Built initial version of package
+
