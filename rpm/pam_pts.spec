@@ -25,11 +25,12 @@ make %{?_smp_mflags}
 rm -rf $RPM_BUILD_ROOT
 install -D -m 0755 pam_pts.so $RPM_BUILD_ROOT/%{_lib}/security/pam_pts.so
 
+# Install man page
+install -D -m 0755 pam_pts.man $RPM_BUILD_ROOT/%{_mandir}/man8/pam_pts.8
+
 # set up configuration
 mkdir -p $RPM_BUILD_ROOT/etc
-echo '/etc/security/pam_pts' >  $RPM_BUILD_ROOT/etc/pam_pts.confdir
-chmod 0700 $RPM_BUILD_ROOT/etc/pam_pts.confdir
-install -d -m 0755 $RPM_BUILD_ROOT/etc/security/pam_pts
+touch $RPM_BUILD_ROOT/etc/pam_pts.confdir
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -38,8 +39,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(-,root,root,-)
 %doc 00.Notes pam.conf rpm/README.config
 /%{_lib}/security/pam_pts.so
-%config /etc/pam_pts.confdir
-%dir /etc/security/pam_pts
-
+%ghost %config /etc/pam_pts.confdir
+%{_mandir}/man8/pam_pts.8.gz
 
 %changelog
