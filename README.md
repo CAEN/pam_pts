@@ -23,7 +23,7 @@ authorized to use a service by the user's membership in a PTS group.
 <P>
 Configuration is managed by an setting the path to all authorization
 files in the &quot;authorization file&quot;, which by default is
-<I>/etc/pam_pts.confdir</I>.  If this file does not exist, then this pam
+<I>/etc/security/pam_pts.confdir</I>.  If this file does not exist, then this pam
 module always suceeds.  The contents of this file should simply be a
 path on the disk.  If the path doesn't exist, then this module always
 denies. 
@@ -70,7 +70,7 @@ does not log any messages on failure
 <A NAME="lbAF">&nbsp;</A>
 <H2>FILES</H2>
 
-<I>/etc/pam_pts.confdir</I>
+<I>/etc/security/pam_pts.confdir</I>
 <BR>
 
 <I>/etc/security/pam_pts/default</I>
