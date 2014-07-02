@@ -35,7 +35,7 @@ AFSLIBS = -L/usr/lib -L/usr/lib/afs /usr/lib/afs/libprot.a /usr/lib/libafsauthen
 endif
 endif # AFSLIBS
 
-LDLIBS += -lc -lpam -lnsl  $(AFSLIBS)
+LDLIBS += -lc -lpam -lnsl -lresolv  $(AFSLIBS)
 
 # resolve with local variables in shared library
 DYNFLAGS = -o $(MODULE)
