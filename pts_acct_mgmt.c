@@ -70,7 +70,7 @@ pam_sm_acct_mgmt(
 	int	error = 0;
 	struct pam_conv *pam_convp;
 
-        openlog("pam_pts", LOG_PID, LOG_AUTH);
+        openlog("pam_pts", LOG_CONS | LOG_PID | LOG_NDELAY, LOG_AUTH);
 
 	if (pam_get_item(pamh, PAM_USER, (const void **)&user) != PAM_SUCCESS) {
 		syslog(LOG_DEBUG, "%s",
