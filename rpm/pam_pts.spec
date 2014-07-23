@@ -1,6 +1,6 @@
 Name:           pam_pts
 Version:        0.1
-Release:        1%{?dist}
+Release:        4%{?dist}
 Summary:        PAM module that uses PTS membership to authorize access
 
 Group:          System Environment/Base
@@ -43,6 +43,15 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man8/pam_pts.8.gz
 
 %changelog
+* Wed Jul 02 2014 Jonathan S. Billings <jsbillin@umich.edu> - 0.1-4
+- Improve logging and fix location of configuration file
+
+* Wed Jul 02 2014 Jonathan S. Billings <jsbillin@umich.edu> - 0.1-3
+- Fix syslog() function
+
+* Wed Jul 02 2014 Jonathan S. Billings <jsbillin@umich.edu> - 0.1-2
+- Added libresolv dependency
+
 * Thu Aug 08 2013 Jonathan S. Billings <jsbillin@umich.edu> - 0.1-1
 - Built initial version of package
 

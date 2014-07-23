@@ -12,10 +12,10 @@ authorized to use a service by the user's membership in a PTS group.
 
 Configuration is managed by an setting the path to all authorization
 files in the "authorization file", which by default is
-\fI/etc/pam_pts.confdir\fR.  If this file does not exist, then this pam
-module always suceeds.  The contents of this file should simply be a
-path on the disk.  If the path doesn't exist, then this module always
-denies. 
+\fI/etc/security/pam_pts.confdir\fR.  If this file does not exist,
+then this pam module always suceeds.  The contents of this file should
+simply be a path on the disk.  If the path doesn't exist, then this
+module always denies. 
 
 In the configured path, there are two possible files \fBpam_pts\fR
 will look for.  The first is the hostname, as returned by the
@@ -53,7 +53,7 @@ defines the file to print to the user when they are denied.
 does not log any messages on failure
 
 .SH FILES
-\fI/etc/pam_pts.confdir\fR
+\fI/etc/security/pam_pts.confdir\fR
 .br
 \fI/etc/security/pam_pts/default\fR
 .br
