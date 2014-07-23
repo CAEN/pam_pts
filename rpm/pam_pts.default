@@ -1,0 +1,20 @@
+# pam_pts configuration file
+# In the authorization directory, create a file 'default.' In that file
+# you will place the description of pam_pts groups you want to permit or
+# deny.  
+#
+# Syntax:
+# <PTS group> <list of PAM services | * >
+# 
+# For example:
+# ------------------------
+# loginusers:deny deny
+# itorg:staff *
+# othergroup *
+# loginusers:subscribers ssh sshd
+# ------------------------
+# Note: you can also create a host-specific configuration file with the
+# hosts's name, as is returned by the gethostname() call.
+
+# Default configuration to allow all users
+system:anyuser *
