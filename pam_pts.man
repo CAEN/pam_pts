@@ -1,0 +1,68 @@
+.TH pam_pts 8 2013/08/08 "CAEN Systems Group" "pam_pts documentation"
+
+.SH NAME
+pam_pts \- Control authorization via AFS PTS Groups
+
+.SH SYNOPSIS
+.B  account required pam_pts.so
+
+.SH DESCRIPTION
+The \fBpam_pts\fR module is designed to allow control over who is
+authorized to use a service by the user's membership in a PTS group.
+
+Configuration is managed by an setting the path to all authorization
+files in the "authorization file", which by default is
+\fI/etc/security/pam_pts.confdir\fR.  If this file does not exist,
+then this pam module always suceeds.  The contents of this file should
+simply be a path on the disk.  If the path doesn't exist, then this
+module always denies. 
+
+In the configured path, there are two possible files \fBpam_pts\fR
+will look for.  The first is the hostname, as returned by the
+gethostname() syscall.  If that file doesn't exist, then it reads the
+file \fIdefault\fR.  If this file doesn't exist, then the pam module
+denies access.
+
+The configuration file lists PTS groups and what service is allowed.
+Each line starts with a PTS group, then a list of services, separated
+by a space, tab or comma.  All leading whitespace, empty lines and
+#-delimited comments are ignored.  All lines with improper formatting
+are skipped.
+
+Each line in the configuration line is read, and the PAM service
+calling the pam_pts function is matched against the service in the
+line.  There are two special names for services, "deny" and "*".
+For "deny" the user is checked against the PTS group, and if the user
+is a member, then authorization is denied.  If the PAM service matches
+one of the services described on the line, or the service is "*", then
+pam_pts checks to see if the user is a member of the PTS group, and if
+they are, then the module succeeds.  If the module gets to the end of
+the file and there have been no matches, then the module denies
+authorization.
+
+.SH ARGUMENTS
+
+.IP debug
+turns on debugging via \fBsyslog\fR(3).  Debugging messages are logged with
+priority \fILOG_DEBUG\fR.
+
+.IP "denyfile=\fI/path/to/file\fR"
+defines the file to print to the user when they are denied.
+
+.IP nowarn
+does not log any messages on failure
+
+.SH FILES
+\fI/etc/security/pam_pts.confdir\fR
+.br
+\fI/etc/security/pam_pts/default\fR
+.br
+\fI/etc/security/pam_pts/<hostname>\fR
+.br
+
+.SH "SEE ALSO"
+.BR pam_krb5 (5)
+.br
+
+.SH AUTHOR
+Jonathan Billings <jsbillin@umich.edu>

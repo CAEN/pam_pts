@@ -13,10 +13,12 @@
 #include <sys/stat.h>
 #include <sys/param.h>
 #include <fcntl.h>
+#include <unistd.h>
 #include <syslog.h>
 #include <string.h>
 
 #include "utils.h"
+#include "auth-umich.h"
 
 #define DEFAULT_DENY_FILE "/etc/login.sorry"
 #define DEFAULT_DENY_MSG "You are not authorized to use this service.\n"
@@ -68,16 +70,16 @@ pam_sm_acct_mgmt(
 	int	error = 0;
 	struct pam_conv *pam_convp;
 
-        openlog("pam_pts", LOG_PID, LOG_AUTH);
+        openlog("pam_pts", LOG_CONS | LOG_PID | LOG_NDELAY, LOG_AUTH);
 
 	if (pam_get_item(pamh, PAM_USER, (const void **)&user) != PAM_SUCCESS) {
-		syslog(LOG_DEBUG, 
+		syslog(LOG_DEBUG, "%s",
                        "pam service error:  Could not get username.");
 		CL_RETURN(PAM_SERVICE_ERR);
 	}
 
 	if (pam_get_item(pamh, PAM_SERVICE, (const void **)&pg) != PAM_SUCCESS) {
-		syslog(LOG_DEBUG, 
+		syslog(LOG_DEBUG, "%s",
                        "pam service error:  Could not get group.");
 		CL_RETURN(PAM_SERVICE_ERR);
 	}
@@ -85,21 +87,21 @@ pam_sm_acct_mgmt(
 	error = pam_get_item(pamh, PAM_CONV, (const void**) &pam_convp);
 
 	if (error != PAM_SUCCESS) {
-		syslog(LOG_DEBUG, 
+		syslog(LOG_DEBUG, "%s",
                        "pam service error:  Could not get pam_conv.");
 		CL_RETURN(error);
 	}
 
 	if (user == 0 ) {
-		syslog(LOG_DEBUG, "allowing access for null username ptr");
+		syslog(LOG_DEBUG, "%s", "allowing access for null username ptr");
 		CL_RETURN(PAM_SUCCESS);
 	}
 	if (*user == '\0') {
-		syslog(LOG_DEBUG, "allowing access for zero-length username");
+		syslog(LOG_DEBUG, "%s", "allowing access for zero-length username");
 		CL_RETURN(PAM_SUCCESS);
 	}
         if (strncmp(user, "root", 5) == 0) {
-		syslog(LOG_NOTICE, "allowing access for root");
+		syslog(LOG_NOTICE, "%s", "allowing access for root");
 		CL_RETURN(PAM_SUCCESS);
 	}
 
@@ -118,7 +120,7 @@ pam_sm_acct_mgmt(
 		else {
 			/* If we can't trust it in the previous case,  */
 			/* then we can't trust it here either.         */
-			syslog(LOG_DEBUG, "illegal option passed in argv");
+			syslog(LOG_DEBUG, "%s", "illegal option passed in argv");
                 }
 	}
 
