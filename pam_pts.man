@@ -1,4 +1,4 @@
-.TH pam_pts 8 2013/08/08 "CAEN Systems Group" "pam_pts documentation"
+.TH pam_pts 8 2015/01/23 "CAEN Systems Group" "pam_pts documentation"
 
 .SH NAME
 pam_pts \- Control authorization via AFS PTS Groups
@@ -65,4 +65,7 @@ does not log any messages on failure
 .br
 
 .SH AUTHOR
-Jonathan Billings <jsbillin@umich.edu>
+Jonathan Billings <jsbillin@umich.edu> - Ported to RHEL6
+.br
+Originally by:
+Seth Meyer <smeyer@umich.edu>, Steve Simmons <scs@umich.edu>, Adam Bisaro <adbisaro@umich.edu>
