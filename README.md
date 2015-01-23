@@ -42,10 +42,10 @@ are skipped.
 <P>
 Each line in the configuration line is read, and the PAM service
 calling the pam_pts function is matched against the service in the
-line.  There are two special names for services, &quot;deny&quot; and &quot;*&quot;.
+line.  There are two special names for services, &quot;deny&quot; and &quot;&#42;&quot;.
 For &quot;deny&quot; the user is checked against the PTS group, and if the user
 is a member, then authorization is denied.  If the PAM service matches
-one of the services described on the line, or the service is &quot;*&quot;, then
+one of the services described on the line, or the service is &quot;&#42;&quot;, then
 pam_pts checks to see if the user is a member of the PTS group, and if
 they are, then the module succeeds.  If the module gets to the end of
 the file and there have been no matches, then the module denies
