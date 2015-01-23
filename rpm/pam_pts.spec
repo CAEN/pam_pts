@@ -42,9 +42,9 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(-,root,root,-)
 %doc 00.Notes pam.conf rpm/README.config
 /%{_lib}/security/pam_pts.so
-%config /etc/security/pam_pts.confdir
+%config(noreplace) /etc/security/pam_pts.confdir
 %dir /etc/security/pam_pts
-%config /etc/security/pam_pts/default
+%config(noreplace) /etc/security/pam_pts/default
 %{_mandir}/man8/pam_pts.8.gz
 
 %changelog
